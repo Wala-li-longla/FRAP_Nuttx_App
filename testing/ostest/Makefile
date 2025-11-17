@@ -31,7 +31,7 @@ MODULE = $(CONFIG_TESTING_OSTEST)
 
 # NuttX OS Test
 
-CSRCS   = getopt.c libc_memmem.c restart.c sigprocmask.c sighand.c \
+CSRCS   = spinlock.c getopt.c libc_memmem.c restart.c sigprocmask.c sighand.c \
           signest.c sighelper.c
 
 MAINSRC = ostest_main.c

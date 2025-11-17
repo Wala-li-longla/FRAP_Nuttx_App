@@ -278,6 +278,23 @@ static int user_main(int argc, char *argv[])
    * verify that status is retained correctly.
    */
 
+#ifndef CONFIG_DISABLE_PTHREAD
+      /* Verify pthreads and pthread mutex */
+
+      /* 新增：spinlock 性能测试 */
+      printf("\nuser_main: spinlock test\n");
+      spinlock_test();
+      check_test_memory_usage(); 
+      
+      printf("\nuser_main: mutex test\n");
+      mutex_test();
+      check_test_memory_usage();
+
+      printf("\nuser_main: timed mutex test\n");
+      timedmutex_test();
+      check_test_memory_usage();
+#endif
+
 #if defined(CONFIG_SCHED_HAVE_PARENT) && defined(CONFIG_SCHED_CHILD_STATUS)
     {
       struct sigaction sa;
@@ -389,17 +406,22 @@ static int user_main(int argc, char *argv[])
       check_test_memory_usage();
 #endif
 
-#ifndef CONFIG_DISABLE_PTHREAD
-      /* Verify pthreads and pthread mutex */
+// #ifndef CONFIG_DISABLE_PTHREAD
+//       /* Verify pthreads and pthread mutex */
 
-      printf("\nuser_main: mutex test\n");
-      mutex_test();
-      check_test_memory_usage();
+//       /* 新增：spinlock 性能测试 */
+//       printf("\nuser_main: spinlock test\n");
+//       spinlock_test();
+//       check_test_memory_usage(); 
+      
+//       printf("\nuser_main: mutex test\n");
+//       mutex_test();
+//       check_test_memory_usage();
 
-      printf("\nuser_main: timed mutex test\n");
-      timedmutex_test();
-      check_test_memory_usage();
-#endif
+//       printf("\nuser_main: timed mutex test\n");
+//       timedmutex_test();
+//       check_test_memory_usage();
+// #endif
 
 #if !defined(CONFIG_DISABLE_PTHREAD) && defined(CONFIG_PTHREAD_MUTEX_TYPES)
       /* Verify recursive mutexes */
